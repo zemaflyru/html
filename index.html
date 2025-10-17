@@ -1,81 +1,189 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Профиль Telegram: @zoomflyru</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Профиль Telegram: @zoomflyru</title>
 
-  <meta property="og:title" content="Зёма (@zoomflyru) — Telegram">
-  <meta property="og:description" content="Dev & Exchange | SENIOR & self code">
-  <meta property="og:image" content="avatar.png">
-  <meta property="og:url" content="https://t.me/zoomflyru">
-  <meta property="og:type" content="profile">
+<meta property="og:title" content="Зёма (@zoomflyru) — Telegram">
+<meta property="og:description" content="Dev & Exchange | SENIOR & self code">
+<meta property="og:image" content="avatar.png">
+<meta property="og:url" content="https://zemaflyru.github.io/html/">
+<meta property="og:type" content="profile">
 
-  <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
   <!-- Фон Matrix -->
   <canvas id="matrix"></canvas>
 
-  <!-- Карточка профиля -->
-  <div class="card">
-    <div class="avatar-container">
-      <img src="avatar.png" alt="Аватар @zoomflyru" class="avatar">
+  <div class="main-container">
+    <!-- Левое боковое меню -->
+    <div class="sidebar">
+      <h3>@zoomflyru</h3>
+      <p>Опытный разработчик, создаёт сайты и Telegram-боты любой сложности. Берётся как за простые задачи, так и за продвинутые проекты — надёжно и в срок.</p>
+      <p>Вы можете обращаться ко мне, если вам надо:</p>
+      <div class="services">
+        <button>⭐️ Разработать сайт 🐍</button>
+        <button>⭐️ Исправить ошибки 🐍</button>
+        <button>⭐️ Запустить скрипт 🐍</button>
+        <button>⭐️ Создать тг бота 🐍</button>
+        <button>⭐️ Сделать красивый дизайн 🐍</button>
+        <button>⭐️ Доработать код 🐍</button>
+      </div>
+      <p class="success">✅ Благодаря мне десятки клиентов запустили свой качественный проект. ☀️</p>
     </div>
-    <div class="info">
-      <h2 class="typing-text" data-text="Зёма"></h2>
-      <p class="nickname typing-text" data-text="@zoomflyru"></p>
-      <p class="bio typing-text" data-text="Dev & Exchange | SENIOR & self code"></p>
+
+    <!-- Центр: карточка профиля -->
+    <div class="card-container">
+      <div class="card">
+        <div class="avatar-container" id="avatar">
+          <img src="avatar.png" alt="Аватар Зёма" class="avatar">
+        </div>
+        <div class="info">
+          <h2 class="typing-text" data-text="Зёма"></h2>
+          <p class="nickname typing-text" data-text="@zoomflyru"></p>
+          <p class="bio typing-text" data-text="Dev & Exchange | SENIOR & self code"></p>
+          <div class="tags">
+            <span>JS</span><span>HTML</span><span>CSS</span><span>Python</span>
+          </div>
+        </div>
+        <a href="https://t.me/zoomflyru" class="btn" target="_blank">
+          <img src="telegram-icon.svg" class="icon"> Написать в Telegram
+        </a>
+        <button id="music-btn">🔊 Включить музыку</button>
+        <div id="music-indicator"></div>
+      </div>
     </div>
-    <a href="https://t.me/zoomflyru" class="btn" target="_blank">
-      <img src="telegram-icon.svg" class="icon"> Написать в Telegram
-    </a>
+
+    <!-- Правая панель: Matrix, навыки, статистика и портфолио -->
+    <div class="right-panel">
+      <canvas id="matrix-right"></canvas>
+
+      <div class="skills">
+        <h4>Навыки</h4>
+        <div class="skill-bar">
+          <span>JS</span>
+          <div class="bar"><div class="progress" data-width="95%"></div></div>
+        </div>
+        <div class="skill-bar">
+          <span>HTML</span>
+          <div class="bar"><div class="progress" data-width="90%"></div></div>
+        </div>
+        <div class="skill-bar">
+          <span>CSS</span>
+          <div class="bar"><div class="progress" data-width="85%"></div></div>
+        </div>
+        <div class="skill-bar">
+          <span>Python</span>
+          <div class="bar"><div class="progress" data-width="80%"></div></div>
+        </div>
+      </div>
+
+      <div class="stats">
+        <h4>Статистика</h4>
+        <p>💻 24 Проекта</p>
+        <p>🐍 12 Telegram-ботов</p>
+        <p>⭐️ 50+ довольных клиентов</p>
+      </div>
+
+      <div class="portfolio">
+        <h4>Мини-портфолио</h4>
+        <div class="portfolio-item">
+          <p>🌐 Сайт “CryptoDash” — Dashboard для криптовалют</p>
+        </div>
+        <div class="portfolio-item">
+          <p>🤖 Telegram-бот “TaskMaster” — планировщик задач</p>
+        </div>
+        <div class="portfolio-item">
+          <p>🎨 Лэндинг “ArtSpace” — дизайнерский сайт для художников</p>
+        </div>
+      </div>
+    </div>
   </div>
 
+  <!-- Фоновая музыка -->
+  <audio id="bg-music" loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
   <script>
-    // === Matrix Effect ===
-    const canvas = document.getElementById("matrix");
-    const ctx = canvas.getContext("2d");
-    let w = canvas.width = window.innerWidth;
-    let h = canvas.height = window.innerHeight;
-
-    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()*&^%";
-    const fontSize = 14;
-    const columns = Math.floor(w / fontSize);
-    const drops = Array(columns).fill(1);
-
-    function drawMatrix() {
-      ctx.fillStyle = "rgba(0,0,0,0.05)";
-      ctx.fillRect(0, 0, w, h);
-      ctx.fillStyle = "#0F0";
-      ctx.font = fontSize + "px monospace";
-      for (let i = 0; i < drops.length; i++) {
-        const text = letters[Math.floor(Math.random() * letters.length)];
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-        if (drops[i] * fontSize > h && Math.random() > 0.975) drops[i] = 0;
-        drops[i]++;
-      }
+  // === Matrix Effect слева и справа ===
+  const canvas = document.getElementById("matrix");
+  const ctx = canvas.getContext("2d");
+  let w = canvas.width = window.innerWidth;
+  let h = canvas.height = window.innerHeight;
+  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()*&^%";
+  const fontSize = 14;
+  const columns = Math.floor(w / fontSize);
+  const drops = Array(columns).fill(1);
+  let offsetX = 0, offsetY = 0;
+  window.addEventListener("mousemove", e => { offsetX = (e.clientX - w/2)/50; offsetY = (e.clientY - h/2)/50; });
+  function drawMatrix() {
+    ctx.fillStyle = "rgba(0,0,0,0.05)";
+    ctx.fillRect(0, 0, w, h);
+    ctx.fillStyle = "#0F0";
+    ctx.font = fontSize + "px monospace";
+    for (let i = 0; i < drops.length; i++) {
+      const text = letters[Math.floor(Math.random() * letters.length)];
+      ctx.fillText(text, i * fontSize + offsetX, drops[i] * fontSize + offsetY);
+      if (drops[i] * fontSize > h && Math.random() > 0.975) drops[i] = 0;
+      drops[i]++;
     }
-    setInterval(drawMatrix, 35);
-    window.addEventListener("resize", () => {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
-    });
+  }
+  setInterval(drawMatrix, 35);
+  window.addEventListener("resize", () => { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; });
 
-    // === Печатающийся текст под аватаром ===
-    const typingElements = document.querySelectorAll('.typing-text');
-    typingElements.forEach((el, idx) => {
-      const text = el.dataset.text;
-      let i = 0;
-      function typeChar() {
-        if (i < text.length) {
-          el.textContent += text[i];
-          i++;
-          setTimeout(typeChar, 80);
-        }
-      }
-      setTimeout(typeChar, idx * 600); // последовательная задержка для каждой строки
-    });
+  const canvasRight = document.getElementById("matrix-right");
+  const ctxR = canvasRight.getContext("2d");
+  canvasRight.width = 220; 
+  canvasRight.height = window.innerHeight;
+  const colsR = Math.floor(canvasRight.width / fontSize);
+  const dropsR = Array(colsR).fill(1);
+  function drawMatrixRight() {
+    ctxR.fillStyle = "rgba(0,0,0,0.05)";
+    ctxR.fillRect(0,0,canvasRight.width,canvasRight.height);
+    ctxR.fillStyle = "#0F0";
+    ctxR.font = fontSize + "px monospace";
+    for (let i=0;i<dropsR.length;i++){
+      const text = letters[Math.floor(Math.random()*letters.length)];
+      ctxR.fillText(text, i*fontSize, dropsR[i]*fontSize);
+      if(dropsR[i]*fontSize>canvasRight.height && Math.random()>0.975) dropsR[i]=0;
+      dropsR[i]++;
+    }
+  }
+  setInterval(drawMatrixRight,35);
+
+  // === Печатающийся текст ===
+  const typingElements = document.querySelectorAll('.typing-text');
+  typingElements.forEach((el, idx) => {
+    const text = el.dataset.text;
+    let i = 0;
+    function typeChar() { if(i<text.length){ el.textContent+=text[i]; i++; setTimeout(typeChar,80); } }
+    setTimeout(typeChar, idx*600);
+  });
+
+  // === Аватар click Easter egg ===
+  const avatar = document.getElementById('avatar');
+  avatar.addEventListener('click', () => { alert("Привет, я Зёма!"); });
+
+  // === Музыка ===
+  const btn = document.getElementById('music-btn');
+  const music = document.getElementById('bg-music');
+  const indicator = document.getElementById('music-indicator');
+  music.volume=0.2; music.loop=true;
+  btn.addEventListener('click',()=>{
+    if(music.paused){ music.currentTime=16; music.play().catch(()=>console.log('Автозапуск заблокирован')); btn.textContent="🔇 Остановить музыку"; indicator.classList.add('playing'); }
+    else { music.pause(); btn.textContent="🔊 Включить музыку"; indicator.classList.remove('playing'); }
+  });
+
+  // === Анимация прогресса навыков ===
+  document.querySelectorAll('.skill-bar').forEach(bar => {
+    const progress = bar.querySelector('.progress');
+    const width = progress.getAttribute('data-width') || '0%';
+    progress.style.setProperty('--progress-width', width);
+    setTimeout(() => { progress.style.width = width; }, 300);
+  });
   </script>
 </body>
 </html>
