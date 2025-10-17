@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Профиль Telegram: @zoomflyru</title>
+
+  <meta property="og:title" content="Зёма (@zoomflyru) — Telegram">
+  <meta property="og:description" content="Dev & Exchange | SENIOR & self code">
+  <meta property="og:image" content="avatar.png">
+  <meta property="og:url" content="https://t.me/zoomflyru">
+  <meta property="og:type" content="profile">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Фон Matrix -->
+  <canvas id="matrix"></canvas>
+
+  <!-- Карточка профиля -->
+  <div class="card">
+    <div class="avatar-container">
+      <img src="avatar.png" alt="Аватар @zoomflyru" class="avatar">
+    </div>
+    <div class="info">
+      <h2 class="typing-text" data-text="Зёма"></h2>
+      <p class="nickname typing-text" data-text="@zoomflyru"></p>
+      <p class="bio typing-text" data-text="Dev & Exchange | SENIOR & self code"></p>
+    </div>
+    <a href="https://t.me/zoomflyru" class="btn" target="_blank">
+      <img src="telegram-icon.svg" class="icon"> Написать в Telegram
+    </a>
+  </div>
+
+  <script>
+    // === Matrix Effect ===
+    const canvas = document.getElementById("matrix");
+    const ctx = canvas.getContext("2d");
+    let w = canvas.width = window.innerWidth;
+    let h = canvas.height = window.innerHeight;
+
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()*&^%";
+    const fontSize = 14;
+    const columns = Math.floor(w / fontSize);
+    const drops = Array(columns).fill(1);
+
+    function drawMatrix() {
+      ctx.fillStyle = "rgba(0,0,0,0.05)";
+      ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = "#0F0";
+      ctx.font = fontSize + "px monospace";
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > h && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      }
+    }
+    setInterval(drawMatrix, 35);
+    window.addEventListener("resize", () => {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    });
+
+    // === Печатающийся текст под аватаром ===
+    const typingElements = document.querySelectorAll('.typing-text');
+    typingElements.forEach((el, idx) => {
+      const text = el.dataset.text;
+      let i = 0;
+      function typeChar() {
+        if (i < text.length) {
+          el.textContent += text[i];
+          i++;
+          setTimeout(typeChar, 80);
+        }
+      }
+      setTimeout(typeChar, idx * 600); // последовательная задержка для каждой строки
+    });
+  </script>
+</body>
+</html>

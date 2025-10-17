@@ -1,0 +1,107 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #000;
+}
+
+canvas#matrix {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.card {
+  position: relative;
+  z-index: 1;
+  width: 580px;
+  min-height: 380px;
+  background: rgba(0,0,0,0.85);
+  border-radius: 25px;
+  box-shadow: 0 20px 60px rgba(0,255,136,0.7);
+  text-align: center;
+  padding: 50px 40px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  animation: cardPulse 2s infinite alternate;
+}
+
+@keyframes cardPulse {
+  0% { transform: scale(1); box-shadow: 0 20px 60px rgba(0,255,136,0.7);}
+  100% { transform: scale(1.02); box-shadow: 0 25px 80px rgba(0,255,136,0.85);}
+}
+
+.avatar-container {
+  display: inline-block;
+  padding: 8px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #00ff88, #00c6ff);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.avatar-container:hover {
+  transform: scale(1.25);
+  box-shadow: 0 0 50px rgba(0,255,136,0.8);
+}
+
+.avatar {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+}
+
+.info h2, .nickname, .bio {
+  opacity: 1; /* теперь текст виден сразу, печатается через JS */
+  margin: 0;
+  color: #aad;
+}
+
+.nickname {
+  font-size: 18px;
+  color: #aad;
+}
+
+.bio {
+  font-size: 15px;
+  color: #ccc;
+  line-height: 1.4;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 28px;
+  background-color: #0088cc;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.btn:hover {
+  background-color: #00aaee;
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 25px rgba(0,0,0,0.6);
+}
+
+.btn .icon {
+  width: 28px;
+  height: 28px;
+  margin-right: 10px;
+  transition: transform 0.3s;
+}
+
+.btn:hover .icon {
+  transform: rotate(-20deg) scale(1.1);
+}
